@@ -45,8 +45,7 @@ export class ProductController {
     const successMessages = req.flash('success');
     const successMessage = successMessages.length > 0 ? successMessages[0] : null;
 
-    // console.log(successMessage, errorMessage);
-    return {
+     return {
       products,
       errorMessage,
       successMessage,

@@ -14,9 +14,6 @@ export class ProductService {
 
   private products: ProductEntity[] = [];
 
-  // async getAllProducts(): Promise<ProductEntity[]> {
-  //   return await this.productRepository.find();
-  // }
   async getAllProducts(sortBy?: string, sortOrder: 'ASC' | 'DESC' = 'DESC'): Promise<ProductEntity[]> {
     // Define options for find method
     const options: FindManyOptions<ProductEntity> = {};
@@ -37,11 +34,11 @@ export class ProductService {
   }
 
   async createProduct(productDTO: ProductDTO): Promise<ProductEntity> {
-    // Создаем новый экземпляр ProductEntity из DTO
+
     const newProduct = this.productRepository.create(productDTO);
 
     console.log('newProduct', newProduct);
-    // Сохраняем новый продукт в базу данных
+
     const savedProduct = await this.productRepository.save(newProduct);
 
     console.log('savedProduct', savedProduct);
