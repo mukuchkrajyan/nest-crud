@@ -9,6 +9,8 @@
 
 ###### some packages installations using npm, the default package manager for Node.js
 
+######  test sql is nestjs_crud.sql
+
 - npm install --save @nestjs/jwt passport passport-jwt
 - npm install --save-dev @types/passport-jwt
 - npm install --save @nestjs/typeorm typeorm mysql2 ejs express-ejs-layouts
