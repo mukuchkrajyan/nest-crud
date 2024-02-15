@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<% if (successMessage) { %>
+    <div class="alert alert-success" role="alert">
+        <%= successMessage %>
+    </div>
+<% } %>
+
+<% if (errorMessage) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= errorMessage %>
+    </div>
+<% } %>
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <!-- Add button to navigate to the "Add Product" page -->
+            <a href="/products/add" class="btn btn-primary">Add Product</a>
+        </div>
+    </div>
+    <h1 class="mt-4">Product List</h1>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <tr>
+<!--                    <th scope="col">Name</th>-->
+<!--                    <th scope="col">Price</th>-->
+                    <th><a href="/products?sortBy=name&sortOrder=<%= sortOrder === 'ASC' && sortBy === 'name' ? 'DESC' : 'ASC' %>">Name <%= sortBy === 'name' ? (sortOrder === 'ASC' ? '▲' : '▼') : '' %></a></th>
+                    <th><a href="/products?sortBy=price&sortOrder=<%= sortOrder === 'ASC' && sortBy === 'price' ? 'DESC' : 'ASC' %>">Price <%= sortBy === 'price' ? (sortOrder === 'ASC' ? '▲' : '▼') : '' %></a></th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.name %></td>
+                        <td>$<%= product.price %></td>
+                        <td>
+                            <!-- Edit button -->
+                            <a href="/products/edit/<%= product.id %>" class="btn btn-primary btn-sm mr-2">Edit</a>
+                            <!-- Delete button -->
+                            <form action="/products/<%= product.id %>?_method=DELETE" method="post" style="display: inline;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
